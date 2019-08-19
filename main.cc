@@ -573,11 +573,20 @@ void Chance::StayImpl(Player *p) const
 int main(int argc, char **argv)
 {
     using namespace monocarlo;
+    using n_steps_t = unsigned long long;
+
+    if (argc != 2)
+    {
+        std::cerr << "usage: monocarlo <n_steps>" << std::endl;
+        return 1;
+    }
+
+    n_steps_t n_steps = std::stoll(argv[1]);
 
     World world;
-    Player *p = world.GetPlayer("lao-zhao");
+    Player *p = world.GetPlayer("Luke Skywalker");
 
-    for (int i = 0; i < 1000000; ++i) p->Go();
+    for (int i = 0; i < n_steps; ++i) p->Go();
 
     world.PrintStats();
     return 0;
